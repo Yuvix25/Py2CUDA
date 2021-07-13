@@ -1,9 +1,8 @@
-import ast, os
-from typing import Type
+import ast, os, argparse
 from exceptions import *
 
 class Py2Cuda:
-    def __init__(self, file_name, arch="sm_86"):
+    def __init__(self, file_name, arch="sm_61"):
         self._predefiend_funcs = {
             "print" : "printf",
             "deviceSync" : "cudaDeviceSynchronize"
@@ -673,4 +672,11 @@ class Py2Cuda:
         return  output
 
 if __name__ == "__main__":
-    py2cuda = Py2Cuda("test.py", "sm_86")
+    # py2cuda = Py2Cuda("test.py", "sm_86")
+    parser = argparse.ArgumentParser(description="Convert Python code to CUDA.")
+    parser.add_argument("-f", "--file", default="test.py", help="Python file to convert to CUDA.")
+    parser.add_argument("-a", "--arch", default="sm_61", help="Compute Capatability.")
+
+    args = parser.parse_args()
+
+    py2cuda = Py2Cuda(args.file, args.arch)
