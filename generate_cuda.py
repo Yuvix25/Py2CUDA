@@ -232,6 +232,8 @@ class Py2Cuda:
         cuda_file.write(cuda_output)
         cuda_file.close()
 
+        return cuda_output
+
     def compile_cuda(self):
         dir_name, file_name = os.path.split(os.path.abspath(self.output_name))
         os.system(f"cd {dir_name} && nvcc {file_name} -arch={self.arch} -o test && test")
@@ -672,9 +674,9 @@ class Py2Cuda:
         return  output
 
 if __name__ == "__main__":
-    # py2cuda = Py2Cuda("test.py", "sm_86")
+    # py2cuda = Py2Cuda("./examples/test.py", "sm_86")
     parser = argparse.ArgumentParser(description="Convert Python code to CUDA.")
-    parser.add_argument("-f", "--file", default="test.py", help="Python file to convert to CUDA.")
+    parser.add_argument("-f", "--file", default="./examples/test.py", help="Python file to convert to CUDA.")
     parser.add_argument("-a", "--arch", default="sm_61", help="Compute Capatability.")
 
     args = parser.parse_args()
