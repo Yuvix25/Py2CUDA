@@ -5,6 +5,11 @@ __pycache__/
 
 .vscode/
 
+*.exe
+*.exp
+*.lib
+
+
 # C extensions
 *.so
 
